@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import net.sf.json.JSONObject;
+
 @Entity
 public class Token {
 
@@ -49,7 +51,13 @@ public class Token {
 		this.reissuingTime = reissuingTime;
 	}
 	
-	
+	public JSONObject toJSON(){
+		
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("token", this.token);
+		jsonObject.put("expires", this.expireTime.toString());
+		return jsonObject;
+	}
 	
 	
 }

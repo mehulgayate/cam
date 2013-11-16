@@ -68,5 +68,12 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="repository"
+		class="com.cam.entity.support.Repository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
 		
 </beans>
