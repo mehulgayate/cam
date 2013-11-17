@@ -74,6 +74,12 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="dataTransaction"
+		class="com.cam.entity.support.DataTransaction">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="repository" ref="repository" />
+	</bean>
+	
 	
 		
 </beans>

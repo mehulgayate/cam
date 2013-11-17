@@ -1,8 +1,8 @@
 #!/bin/bash
 
-TOMCAT_HOME_DIR=/opt/dev/evalua/server/cam/apache-tomcat-6.0.37
+TOMCAT_HOME_DIR=/evalua/servers/cam/apache-tomcat-6.0.37
 TOMCAT_BIN=$TOMCAT_HOME_DIR/bin
-PROJECT_HOME=/opt/dev/evalua/workspace/cam
+PROJECT_HOME=/evalua/workspace/cam
 TOMCAT_WEBAPP=$TOMCAT_HOME_DIR/webapps
 TARGET_WEBAPP=$PROJECT_HOME/target/cam
 
