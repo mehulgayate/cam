@@ -25,9 +25,16 @@ public class TokenController {
 	@Resource
 	private DataTransaction transaction;
 	
+	@RequestMapping("/")
+	public ModelAndView getLogin(){
+		ModelAndView mv=new ModelAndView("index");
+		mv.addObject("msg","done");
+		return mv;
+	}
+	
 	@RequestMapping("/getToken")
 	public ModelAndView getToken(HttpServletRequest request){
-		ModelAndView mv=new ModelAndView("json-string");
+		ModelAndView mv=new ModelAndView("addMedicalProfile");
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		User user=repository.findUserByUserPass(email, password);
@@ -38,11 +45,22 @@ public class TokenController {
 			error.setErrorMassage("Invalid Login");
 			JSONObject jsonObject=new JSONObject();
 			jsonObject.put("error", error.toJSON());
+			mv=new ModelAndView("json-string");
 			mv.addObject("error",jsonObject);
 			return mv;
 		}
-		
+
 		if(user.getToken()!=null){
+			mv.addObject("token",user.getToken());
+			return mv;
+		}
+		else{
+			Token token=transaction.generateToken(user);
+			mv.addObject("token",token);
+			return mv;
+		}
+		
+		/*if(user.getToken()!=null){
 			JSONObject jsonObject=new JSONObject();
 			jsonObject.put("access_token", user.getToken().toJSON());
 			mv.addObject("token",jsonObject);
@@ -54,7 +72,7 @@ public class TokenController {
 			jsonObject.put("access_token", token.toJSON());
 			mv.addObject("token",jsonObject);
 			return mv;
-		}
+		}*/
 	}
 
 }

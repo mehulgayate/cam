@@ -79,7 +79,14 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 		<property name="repository" ref="repository" />
 	</bean>
-	
+
+	<bean id="userUtility"
+		class="com.cam.utility.UserUtility">
+		<property name="repository" ref="repository" />
+	</bean>
+	<bean id="medicalProfileThreshold"
+		class="com.cam.utility.MedicalProfileTheshold">
+	</bean>	
 	
 		
 </beans>

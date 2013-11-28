@@ -1,9 +1,5 @@
 package com.cam.entity.support;
 
-import java.util.Date;
-
-import javax.jws.soap.SOAPBinding.Use;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,9 +21,19 @@ public class Repository {
 
 		Session session=getSession();
 		User user=(User) session.get(User.class, id);
-		session.close();
+		//session.close();
 		return user;
 
+	}
+	
+	public User findUserByToken(Token token){
+		
+		Session session=getSession();
+		Query query=session.createQuery("from "+User.class.getName()+" e where e.token=:token");
+		query.setParameter("token",token);
+		User user=(User) query.uniqueResult();
+		//session.close();
+		return user;
 	}
 
 	public User findUserByUserPass(String email,String password){
@@ -37,12 +43,23 @@ public class Repository {
 		query.setParameter("email", email);
 		query.setParameter("password", password);
 		User user=(User) query.uniqueResult();
-		session.close();
+		//session.close();
 		return  user;
+	}
+	
+	public Token findTokenByTokenString(String tokenString){
+		
+		Session session=getSession();
+		Query query=session.createQuery("from "+Token.class.getName()+" where token=:token");
+		query.setParameter("token", tokenString);
+		Token token=(Token) query.uniqueResult();
+		//session.close();
+		return  token;
+		
 	}
 
 	private Session getSession(){
-		Session session=sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		return session;
 	}
 

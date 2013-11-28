@@ -44,6 +44,5 @@
 
 <bean name="jsonViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
    	<property name="order" value="0" />
-</bean>
-    
+</bean>    
 </beans>

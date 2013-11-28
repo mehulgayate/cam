@@ -4,10 +4,12 @@ import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cam.entity.Token;
 import com.cam.entity.User;
 
+@Transactional
 public class DataTransaction {
 	
 	private SessionFactory sessionFactory;
@@ -24,14 +26,14 @@ public class DataTransaction {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	public Session save(EntityBase entity){		
+	public void save(EntityBase entity){		
 	Session session=getSession();
 	session.saveOrUpdate(entity);
-	return session;
+	//session.close();
 	}
 	
 	private Session getSession(){
-		return sessionFactory.openSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 	public Token generateToken(User user){		
@@ -39,10 +41,10 @@ public class DataTransaction {
 		token.setExpireTime(new Date());
 		token.setGenerationTime(new Date());
 		token.setReissuingTime(new Date());
-		token.setToken(new Date()+"_mac@util_"+user.getId());
+		token.setToken(new Date().getTime()+"_mac@util_"+user.getId());
 		save(token);
 		user.setToken(token);
-		save(user).close();
+		save(user);
 		return token;
 	}
 
