@@ -79,7 +79,18 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 		<property name="repository" ref="repository" />
 	</bean>
-
+	
+	<bean id="dataStoreManager"
+		class="com.evalua.entity.support.DataStoreManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	<bean id="userService"
+		class="com.cam.web.support.UserService">
+				<property name="dataStoreManager" ref="dataStoreManager" />
+				<property name="repository" ref="repository" />
+				
+	    
+	</bean>
 	<bean id="userUtility"
 		class="com.cam.utility.UserUtility">
 		<property name="repository" ref="repository" />

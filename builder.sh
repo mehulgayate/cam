@@ -1,11 +1,13 @@
 #!/bin/bash
 
-TOMCAT_HOME_DIR=/evalua/servers/cam/apache-tomcat-6.0.37
+PROJECT_NAME=cam
+TOMCAT_HOME_DIR=/evalua/servers/$PROJECT_NAME/apache-tomcat-6.0.37
 TOMCAT_BIN=$TOMCAT_HOME_DIR/bin
-PROJECT_HOME=/evalua/workspace/cam
+PROJECT_HOME=`pwd`
 TOMCAT_WEBAPP=$TOMCAT_HOME_DIR/webapps
-TARGET_WEBAPP=$PROJECT_HOME/target/cam
+TARGET_WEBAPP=$PROJECT_HOME/target/$PROJECT_NAME
 
+echo "PROJECT HOME : $PROJECT_HOME"
 
 cd $TOMCAT_BIN
   ./catalina.sh stop
@@ -15,10 +17,19 @@ mvn clean
 
 mvn compile war:exploded
 
-if [ ! -L $TOMCAT_WEBAPP/ROOT ]; then
+if [ ! -L $TOMCAT_WEBAPP/$PROJECT_NAME ]; then
 cd $TOMCAT_WEBAPP
-ln -s $TARGET_WEBAPP ROOT
+ln -s $TARGET_WEBAPP $PROJECT_NAME
 fi
+
+cd $TARGET_WEBAPP 
+rm -rf static
+ln -s $PROJECT_HOME/src/main/webapp/static static
+
+cd WEB-INF
+rm -rf jsp
+ln -s $PROJECT_HOME/src/main/webapp/WEB-INF/jsp jsp
+
 cd $TOMCAT_BIN
   ./catalina.sh run
 

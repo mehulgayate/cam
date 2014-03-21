@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import com.cam.entity.support.EntityBase;
+import com.evalua.entity.support.EntityBase;
 
 import net.sf.json.JSONObject;
 
@@ -19,16 +19,8 @@ public class Token extends EntityBase {
 	private String token;
 	private Date generationTime;
 	private Date expireTime;
-	private Date reissuingTime;
+	private Date reissuingTime;	
 	
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getToken() {
 		return token;
 	}

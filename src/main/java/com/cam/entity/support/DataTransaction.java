@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cam.entity.Token;
 import com.cam.entity.User;
+import com.evalua.entity.support.EntityBase;
 
 @Transactional
 public class DataTransaction {

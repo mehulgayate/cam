@@ -62,5 +62,10 @@ public class Repository {
 		Session session=sessionFactory.getCurrentSession();
 		return session;
 	}
+	
+	public User findUserByEmail(String email){
+		return (User) getSession().createQuery("From "+User.class.getName()+" where email=:email")
+				.setParameter("email",email).uniqueResult();
+	}
 
 }

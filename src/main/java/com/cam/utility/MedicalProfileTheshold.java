@@ -1,5 +1,8 @@
 package com.cam.utility;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+
 import com.cam.entity.support.AllProperties;
 
 public class MedicalProfileTheshold {
@@ -33,5 +36,15 @@ public class MedicalProfileTheshold {
 	}
 	public void setSaltIntake(int saltIntake) {
 		this.saltIntake = saltIntake;
+	}
+	
+	public JSONObject toJSON(){
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("bloodPressure", this.bloodPressure);
+		jsonObject.put("energyExpenditure", this.energyExpenditure);
+		jsonObject.put("missedMedication", this.missedMedication);
+		jsonObject.put("saltIntake", this.saltIntake);
+		
+		return jsonObject;
 	}
 }

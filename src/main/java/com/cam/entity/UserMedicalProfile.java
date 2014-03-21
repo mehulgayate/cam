@@ -7,13 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.cam.entity.support.EntityBase;
+import net.sf.json.JSONObject;
+
 import com.cam.entity.support.TreeLocation;
+import com.evalua.entity.support.EntityBase;
 
 @Entity
 public class UserMedicalProfile extends EntityBase{
 	
-	private Long id;
 	private User user;
 	private int bloodPressure;
 	private int missedMedication;
@@ -51,15 +52,7 @@ public class UserMedicalProfile extends EntityBase{
 	}
 	public void setSaltIntakeTreeLocation(TreeLocation saltIntakeTreeLocation) {
 		this.saltIntakeTreeLocation = saltIntakeTreeLocation;
-	}
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	}	
 	
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	public User getUser() {
@@ -91,6 +84,20 @@ public class UserMedicalProfile extends EntityBase{
 	}
 	public void setSaltIntake(int saltIntake) {
 		this.saltIntake = saltIntake;
-	}	
+	}
+	public JSONObject toJSON(){
+		JSONObject jsonObject =new JSONObject();
+		jsonObject.put("bloodPressure", this.bloodPressure);
+		jsonObject.put("bloodPressureTreeLocation", this.bloodPressureTreeLocation);
+		jsonObject.put("energyExpenditure", this.energyExpenditure);
+		jsonObject.put("energyExpenditureTreeLocation", this.energyExpenditureTreeLocation);
+		jsonObject.put("missedMedication", this.missedMedication);
+		jsonObject.put("missedMedicationTreeLocation", this.missedMedicationTreeLocation);
+		jsonObject.put("saltIntake", this.saltIntake);
+		jsonObject.put("saltIntakeTreeLocation", this.saltIntakeTreeLocation);
+		jsonObject.put("userId",this.user.getId());
+		
+		return jsonObject;
+	}
 
 }
