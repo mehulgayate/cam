@@ -1,5 +1,10 @@
 package com.cam.utility;
 
+import java.math.BigInteger;
+
+import thep.paillier.EncryptedInteger;
+import thep.paillier.PublicKey;
+import thep.paillier.exceptions.BigIntegerClassNotValid;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
@@ -44,6 +49,23 @@ public class MedicalProfileTheshold {
 		jsonObject.put("energyExpenditure", this.energyExpenditure);
 		jsonObject.put("missedMedication", this.missedMedication);
 		jsonObject.put("saltIntake", this.saltIntake);
+		
+		return jsonObject;
+	}
+	
+	public JSONObject toJSONEncrypted(){
+		
+		JSONObject jsonObject=new JSONObject();
+		PublicKey pubkey = EncryptionUtility.privkey.getPublicKey();
+		try {
+		jsonObject.put("bloodPressure", new EncryptedInteger(new BigInteger(this.bloodPressure+""), pubkey).getCipherVal());
+		jsonObject.put("energyExpenditure", new EncryptedInteger(new BigInteger(this.energyExpenditure+""), pubkey).getCipherVal());
+		jsonObject.put("missedMedication", new EncryptedInteger(new BigInteger(this.missedMedication+""), pubkey).getCipherVal());
+		jsonObject.put("saltIntake",new EncryptedInteger(new BigInteger(this.saltIntake+""), pubkey).getCipherVal());
+		} catch (BigIntegerClassNotValid e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonObject;
 	}

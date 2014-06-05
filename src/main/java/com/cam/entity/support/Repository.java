@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 
 import com.cam.entity.Token;
 import com.cam.entity.User;
+import com.cam.entity.UserMedicalProfile;
 
 public class Repository {
 
@@ -57,6 +58,16 @@ public class Repository {
 		return  token;
 		
 	}
+	
+	public UserMedicalProfile findMedicalProfileById(Long id){
+
+		Session session=getSession();
+		UserMedicalProfile userMedicalProfile=(UserMedicalProfile) session.get(UserMedicalProfile.class, id);
+		//session.close();
+		return userMedicalProfile;
+
+	}
+	
 
 	private Session getSession(){
 		Session session=sessionFactory.getCurrentSession();

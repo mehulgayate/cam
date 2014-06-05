@@ -1,15 +1,24 @@
 package com.cam.entity;
 
+import java.math.BigInteger;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import thep.paillier.EncryptedInteger;
+import thep.paillier.PrivateKey;
+import thep.paillier.PublicKey;
+import thep.paillier.exceptions.BigIntegerClassNotValid;
 
 import net.sf.json.JSONObject;
 
 import com.cam.entity.support.TreeLocation;
+import com.cam.utility.EncryptionUtility;
 import com.evalua.entity.support.EntityBase;
 
 @Entity
@@ -24,7 +33,6 @@ public class UserMedicalProfile extends EntityBase{
 	private TreeLocation missedMedicationTreeLocation;
 	private TreeLocation energyExpenditureTreeLocation;
 	private TreeLocation saltIntakeTreeLocation;
-	
 	
 	
 	public TreeLocation getBloodPressureTreeLocation() {
@@ -96,6 +104,30 @@ public class UserMedicalProfile extends EntityBase{
 		jsonObject.put("saltIntake", this.saltIntake);
 		jsonObject.put("saltIntakeTreeLocation", this.saltIntakeTreeLocation);
 		jsonObject.put("userId",this.user.getId());
+		
+		return jsonObject;
+	}
+	
+	public JSONObject toJSONEncrypted(){
+		JSONObject jsonObject =new JSONObject();
+		PublicKey pubkey = EncryptionUtility.privkey.getPublicKey();
+		try {
+			jsonObject.put("bloodPressure", new EncryptedInteger(new BigInteger(this.bloodPressure+""), pubkey).getCipherVal());
+		
+		jsonObject.put("bloodPressureTreeLocation", new EncryptedInteger(new BigInteger(this.bloodPressureTreeLocation.getInteger()+""), pubkey).getCipherVal());
+		jsonObject.put("energyExpenditure", new EncryptedInteger(new BigInteger(this.energyExpenditure+""), pubkey).getCipherVal());
+		jsonObject.put("energyExpenditureTreeLocation", new EncryptedInteger(new BigInteger(this.energyExpenditureTreeLocation.getInteger()+""), pubkey).getCipherVal());
+		jsonObject.put("missedMedication", new EncryptedInteger(new BigInteger(this.missedMedication+""), pubkey).getCipherVal());
+		jsonObject.put("missedMedicationTreeLocation", new EncryptedInteger(new BigInteger(this.missedMedicationTreeLocation.getInteger()+""), pubkey).getCipherVal());
+		jsonObject.put("saltIntake", new EncryptedInteger(new BigInteger(this.saltIntake+""), pubkey).getCipherVal());
+		jsonObject.put("saltIntakeTreeLocation", new EncryptedInteger(new BigInteger(this.saltIntakeTreeLocation.getInteger()+""), pubkey).getCipherVal());
+		jsonObject.put("userId",this.user.getId());
+		jsonObject.put("id",this.getId());
+		
+		} catch (BigIntegerClassNotValid e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonObject;
 	}
