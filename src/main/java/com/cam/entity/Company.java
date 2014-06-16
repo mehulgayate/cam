@@ -1,20 +1,17 @@
 package com.cam.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
 
 import com.evalua.entity.support.EntityBase;
 
-
 @Entity
-public class User extends EntityBase {
+public class Company extends EntityBase{
 	
 	private String name;
 	private String email;
+	private String address;
+	private String country;
 	private String password;
-	private Token token;	
 	
 	public String getName() {
 		return name;
@@ -28,6 +25,18 @@ public class User extends EntityBase {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -35,12 +44,6 @@ public class User extends EntityBase {
 		this.password = password;
 	}
 	
-	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	public Token getToken() {
-		return token;
-	}
-	public void setToken(Token token) {
-		this.token = token;
-	}	
+	
 
 }

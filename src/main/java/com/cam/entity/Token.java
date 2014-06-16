@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
 public class Token extends EntityBase {
 
 	
-	private Long id;
+	
 	private String token;
 	private Date generationTime;
 	private Date expireTime;

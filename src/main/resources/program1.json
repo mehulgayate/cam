@@ -1,0 +1,215 @@
+{
+	"branches" : [
+	
+		{
+			"isLeaf":"false",
+			"name":"bloodPressure",
+			"left":"missedMedication1",
+			"right":"missedMedication2"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"missedMedication1",
+			"left":"physicalActivity1",
+			"right":"physicalActivity2"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"missedMedication2",
+			"left":"physicalActivity3",
+			"right":"physicalActivity4"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"physicalActivity1",
+			"left":"normalDiet1",
+			"right":"normalDiet2"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"physicalActivity2",
+			"left":"normalDiet3",
+			"right":"normalDiet4"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"physicalActivity3",
+			"left":"normalDiet5",
+			"right":"normalDiet6"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"physicalActivity4",
+			"left":"normalDiet7",
+			"right":"normalDiet8"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"normalDiet1",
+			"left":"solutionSet1",
+			"right":"solutionSet2"
+		},		
+		{
+			"isLeaf":"false",
+			"name":"normalDiet2",
+			"left":"solutionSet3",
+			"right":"solutionSet4"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet3",
+			"left":"solutionSet5",
+			"right":"solutionSet6"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet4",
+			"left":"solutionSet7",
+			"right":"solutionSet8"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet5",
+			"left":"solutionSet9",
+			"right":"solutionSet10"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet6",
+			"left":"solutionSet11",
+			"right":"solutionSet12"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet7",
+			"left":"solutionSet13",
+			"right":"solutionSet14"
+		},
+		{
+			"isLeaf":"false",
+			"name":"normalDiet8",
+			"left":"solutionSet15",
+			"right":"solutionSet16"
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet1",
+			"solutions":["D1","D2"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet2",
+			"solutions":["D1","D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet3",
+			"solutions":["D1","D2","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet4",
+			"solutions":["D1","D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet5",
+			"solutions":["D2","D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet6",
+			"solutions":["D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet7",
+			"solutions":["D1","D2"]
+		},		
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet8",
+			"solutions":["D1","D4"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet9",
+			"solutions":["D1","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet10",
+			"solutions":["D2","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet11",
+			"solutions":["D2","D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet12",
+			"solutions":["D1","D2"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet13",
+			"solutions":["D1","D2","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet14",
+			"solutions":["D1","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet15",
+			"solutions":["D1","D4","D3"]
+		},
+		
+		{
+			"isLeaf":"true",
+			"name":"solutionSet16",
+			"solutions":["D1","D2","D3"]
+		}
+	],
+	
+	"solutions" : [
+				
+				{
+					"name":"D1",
+					"description": "Take extra medication"
+				},
+				
+				{
+					"name":"D2",
+					"description": "Increase fluid intake" 
+				},
+				
+				{
+					"name":"D3",
+					"description": "Notify physician" 
+				},
+				
+				{
+					"name":"D4",
+					"description": "Do not take next dosages"
+				}
+	]
+
+}

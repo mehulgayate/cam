@@ -1,9 +1,12 @@
 package com.cam.entity.support;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.cam.entity.Company;
 import com.cam.entity.Token;
 import com.cam.entity.User;
 import com.cam.entity.UserMedicalProfile;
@@ -69,7 +72,7 @@ public class Repository {
 	}
 	
 
-	private Session getSession(){
+	public Session getSession(){
 		Session session=sessionFactory.getCurrentSession();
 		return session;
 	}
@@ -77,6 +80,21 @@ public class Repository {
 	public User findUserByEmail(String email){
 		return (User) getSession().createQuery("From "+User.class.getName()+" where email=:email")
 				.setParameter("email",email).uniqueResult();
+	}
+	
+	public Company findCompanyByEmail(String email){
+		return (Company) getSession().createQuery("From "+Company.class.getName()+" where email=:email")
+				.setParameter("email",email).uniqueResult();
+	}
+	
+	public User findCompanyById(Long id){
+		return (User) getSession().createQuery("From "+Company.class.getName()+" where id=:id")
+				.setParameter("id",id).uniqueResult();
+	}
+	
+	public List<Company> listCompanies(){
+		return  getSession().createQuery("From "+Company.class.getName()).
+				list();
 	}
 
 }
