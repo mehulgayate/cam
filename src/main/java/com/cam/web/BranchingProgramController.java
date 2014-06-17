@@ -1,6 +1,7 @@
 package com.cam.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cam.entity.Branch;
 import com.cam.entity.BranchingProgram;
 import com.cam.entity.Company;
 import com.cam.entity.support.Repository;
@@ -20,33 +22,47 @@ import com.evalua.entity.support.DataStoreManager;
 
 @Controller
 public class BranchingProgramController {
-	
+
 	@Resource
 	private Repository repository;
 
 	@Resource
 	private DataStoreManager dataStoreManager;
-	
-	
+
+
 	@RequestMapping("/company/upload-new")
 	public ModelAndView uploadNew(HttpSession session,@ModelAttribute FileUploadForm fileUploadForm) throws IOException{
 		ModelAndView mv=new ModelAndView("upload-complete");
+
+
 		Company company=(Company) session.getAttribute("user");
-		BranchingProgram branchingProgram=new BranchingProgram();
-		branchingProgram.setFileName(fileUploadForm.getXmlFile().getOriginalFilename());
+		if(company==null){
+			return new ModelAndView("redirect:/company/login");
+		}
+		BranchingProgram branchingProgram=repository.findBranchingProgramByCompany(company);
+		if(branchingProgram==null){
+			branchingProgram=new BranchingProgram();
+		}
+		List<Branch>branches=branchingProgram.getBranches();
 		
+		for (Branch branch : branches) {
+			dataStoreManager.remove(branch);
+		}
+		
+		branchingProgram.setFileName(fileUploadForm.getFile().getOriginalFilename());
+
 		branchingProgram.setCompany(company);		
-		branchingProgram.setFile(Hibernate.getLobCreator(repository.getSession()).createBlob(fileUploadForm.getXmlFile().getBytes()));
-		
+		branchingProgram.setFile(Hibernate.getLobCreator(repository.getSession()).createBlob(fileUploadForm.getFile().getBytes()));
+
 		dataStoreManager.save(branchingProgram);
 		return mv;
 	}
 
-	
+
 	@RequestMapping("/company/upload")
 	public ModelAndView showNewUpload(){
 		ModelAndView mv=new ModelAndView("upload");
-			
+
 		return mv;
 	}
 }

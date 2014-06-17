@@ -6,13 +6,15 @@ public class FileUploadForm {
 
 	public static final String key="fileUploadForm";
 	
-	private MultipartFile xmlFile;
+	private MultipartFile file;
 
-	public MultipartFile getXmlFile() {
-		return xmlFile;
+	public MultipartFile getFile() {
+		return file;
 	}
 
-	public void setXmlFile(MultipartFile xmlFile) {
-		this.xmlFile = xmlFile;
-	}	
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	
 }

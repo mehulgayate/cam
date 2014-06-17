@@ -20,5 +20,9 @@ public class DataStoreManager {
 	private Session getSession(){
 		return sessionFactory.getCurrentSession();
 	}
+	
+	public void remove(EntityBase entity){
+		getSession().delete(entity);
+	}
 
 }

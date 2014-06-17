@@ -1,6 +1,8 @@
 package com.cam.entity;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,8 @@ public class BranchingProgram extends EntityBase{
 	private String fileName;
 	private Company company;
 	private Blob file;
+	
+	private List<Branch> branches=new ArrayList<Branch>(0);
 	
 	@Column(length=5242880)
 	public String getFileName() {
@@ -39,7 +43,12 @@ public class BranchingProgram extends EntityBase{
 		this.file = file;
 	}
 	
-	
-	
+	@OneToOne(cascade = { CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
+	public List<Branch> getBranches() {
+		return branches;
+	}
+	public void setBranches(List<Branch> branches) {
+		this.branches = branches;
+	}
 
 }

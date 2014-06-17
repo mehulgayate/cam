@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.cam.entity.BranchingProgram;
 import com.cam.entity.Company;
 import com.cam.entity.Token;
 import com.cam.entity.User;
@@ -95,6 +96,12 @@ public class Repository {
 	public List<Company> listCompanies(){
 		return  getSession().createQuery("From "+Company.class.getName()).
 				list();
+	}
+	
+	public BranchingProgram findBranchingProgramByCompany(Company company){
+		return  (BranchingProgram) getSession().createQuery("From "+BranchingProgram.class.getName() +" where company=:company")
+				.setParameter("company", company)
+				.uniqueResult();
 	}
 
 }

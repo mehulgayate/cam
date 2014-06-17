@@ -92,7 +92,7 @@ public class UserController {
 	public ModelAndView companyRegisterAdd(@ModelAttribute Company company){
 		ModelAndView mv=new ModelAndView("signup/complete");
 		Company company2=repository.findCompanyByEmail(company.getEmail());
-		if(company2==null){
+		if(company2!=null){
 			return mv;
 		}
 		dataStoreManager.save(company);

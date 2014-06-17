@@ -75,13 +75,7 @@ function clearText(field)
         
     <div id="templatemo_main">
     	<div class="content_wrapper content_mb_30">
-        	<form action="/cam/company/upload-new" method="post" enctype="multipart/form-data">
-			<div style="margin: 0 auto;">
-				Upload JSON file of Branching Program : <input type="file" name="file">
-				<br>
-				<input type="submit" value="Upload And Process">
-			</div>
-			</form>
+        	Upload Complete
         </div>
     	<div class="content_wrapper">
             
