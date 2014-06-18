@@ -16,7 +16,8 @@ public class MedicalProfileTheshold {
 	private int missedMedication=AllProperties.MISSED_MEDICATION;
 	private int energyExpenditure=AllProperties.ENERGY_EXPENDITURE;
 	private int saltIntake=AllProperties.SALT_INTAKE;
-	
+	public int heartBeats=AllProperties.HEART_BEATS;
+	public int suder=AllProperties.SUGER;	
 	
 	public int getBloodPressure() {
 		return bloodPressure;

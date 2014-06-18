@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.evalua.entity.support.EntityBase;
@@ -19,7 +20,7 @@ public class BranchingProgram extends EntityBase{
 	private Company company;
 	private Blob file;
 	
-	private List<Branch> branches=new ArrayList<Branch>(0);
+	private List<ProgramBranch> branches=new ArrayList<ProgramBranch>(0);
 	
 	@Column(length=5242880)
 	public String getFileName() {
@@ -43,11 +44,11 @@ public class BranchingProgram extends EntityBase{
 		this.file = file;
 	}
 	
-	@OneToOne(cascade = { CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
-	public List<Branch> getBranches() {
+	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
+	public List<ProgramBranch> getBranches() {
 		return branches;
 	}
-	public void setBranches(List<Branch> branches) {
+	public void setBranches(List<ProgramBranch> branches) {
 		this.branches = branches;
 	}
 

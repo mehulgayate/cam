@@ -5,7 +5,8 @@
 			"isLeaf":"false",
 			"name":"bloodPressure",
 			"left":"missedMedication1",
-			"right":"missedMedication2"
+			"right":"missedMedication2",
+			"isRoot":"true"
 		},		
 		{
 			"isLeaf":"false",

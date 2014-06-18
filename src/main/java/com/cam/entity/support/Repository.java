@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 
 import com.cam.entity.BranchingProgram;
 import com.cam.entity.Company;
+import com.cam.entity.ProgramBranch;
+import com.cam.entity.ProgramBranchSolutions;
+import com.cam.entity.Solution;
 import com.cam.entity.Token;
 import com.cam.entity.User;
 import com.cam.entity.UserMedicalProfile;
@@ -64,11 +67,16 @@ public class Repository {
 	}
 	
 	public UserMedicalProfile findMedicalProfileById(Long id){
-
 		Session session=getSession();
 		UserMedicalProfile userMedicalProfile=(UserMedicalProfile) session.get(UserMedicalProfile.class, id);
 		//session.close();
 		return userMedicalProfile;
+
+	}
+	
+	public UserMedicalProfile findMedicalProfileByUser(User user){
+		return (UserMedicalProfile) getSession().createQuery("FROM "+UserMedicalProfile.class.getName()+" where user=:user")
+				.setParameter("user",user).uniqueResult();
 
 	}
 	
@@ -88,8 +96,8 @@ public class Repository {
 				.setParameter("email",email).uniqueResult();
 	}
 	
-	public User findCompanyById(Long id){
-		return (User) getSession().createQuery("From "+Company.class.getName()+" where id=:id")
+	public Company findCompanyById(Long id){
+		return (Company) getSession().createQuery("From "+Company.class.getName()+" where id=:id")
 				.setParameter("id",id).uniqueResult();
 	}
 	
@@ -98,9 +106,27 @@ public class Repository {
 				list();
 	}
 	
+	public List<ProgramBranchSolutions> listProgramBranchSolutionsByBranch(ProgramBranch programBranch){
+		return  getSession().createQuery("From "+ProgramBranchSolutions.class.getName()+" where branch=:branch").
+				setParameter("branch", programBranch).
+				list();
+	}
+	
 	public BranchingProgram findBranchingProgramByCompany(Company company){
 		return  (BranchingProgram) getSession().createQuery("From "+BranchingProgram.class.getName() +" where company=:company")
 				.setParameter("company", company)
+				.uniqueResult();
+	}
+	
+	public Solution findSolutionByName(String name){
+		return  (Solution) getSession().createQuery("From "+Solution.class.getName() +" where name=:name")
+				.setParameter("name", name)
+				.uniqueResult();
+	}
+	
+	public ProgramBranch findProgramBranchById(Long id){
+		return  (ProgramBranch) getSession().createQuery("From "+ProgramBranch.class.getName() +" where id=:id")
+				.setParameter("id", id)
 				.uniqueResult();
 	}
 

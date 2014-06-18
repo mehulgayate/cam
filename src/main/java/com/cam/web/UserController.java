@@ -77,7 +77,7 @@ public class UserController {
 		if(company==null || !company.getPassword().equals(password)){
 			return new ModelAndView("login");
 		}
-		session.setAttribute("user",company);
+		session.setAttribute("userId",company.getId());
 		return mv;
 	}
 	

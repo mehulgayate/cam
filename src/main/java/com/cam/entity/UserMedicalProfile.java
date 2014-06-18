@@ -33,6 +33,11 @@ public class UserMedicalProfile extends EntityBase{
 	private TreeLocation missedMedicationTreeLocation;
 	private TreeLocation energyExpenditureTreeLocation;
 	private TreeLocation saltIntakeTreeLocation;
+	private String booldGroup;
+	private Integer suger;
+	private Integer heartBeats;
+	private Boolean physicalActivity;
+	private Boolean normalDiet;
 	
 	
 	public TreeLocation getBloodPressureTreeLocation() {
@@ -92,6 +97,38 @@ public class UserMedicalProfile extends EntityBase{
 	}
 	public void setSaltIntake(int saltIntake) {
 		this.saltIntake = saltIntake;
+	}	
+	
+	public String getBooldGroup() {
+		return booldGroup;
+	}
+	public void setBooldGroup(String booldGroup) {
+		this.booldGroup = booldGroup;
+	}
+	public Integer getSuger() {
+		return suger;
+	}
+	public void setSuger(Integer suger) {
+		this.suger = suger;
+	}
+	public Integer getHeartBeats() {
+		return heartBeats;
+	}
+	public void setHeartBeats(Integer heartBeats) {
+		this.heartBeats = heartBeats;
+	}	
+	
+	public Boolean getPhysicalActivity() {
+		return physicalActivity;
+	}
+	public void setPhysicalActivity(Boolean physicalActivity) {
+		this.physicalActivity = physicalActivity;
+	}
+	public Boolean getNormalDiet() {
+		return normalDiet;
+	}
+	public void setNormalDiet(Boolean normalDiet) {
+		this.normalDiet = normalDiet;
 	}
 	public JSONObject toJSON(){
 		JSONObject jsonObject =new JSONObject();
