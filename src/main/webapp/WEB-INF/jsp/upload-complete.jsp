@@ -5,20 +5,20 @@
 <title>Secured Theme</title>
 <meta name="keywords" content="secured theme, free template, templatemo, red layout" />
 <meta name="description" content="Secured Theme is provided by templatemo.com" />
-<link href="/cam/static/templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="/static/templatemo_style.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" type="text/css" href="/static/style.css" />
-<script type="text/javascript" src="/cam/static/js/jquery.min.js" ></script>
-<script type="text/javascript" src="/cam/static/js/jquery-ui.min.js" ></script>
+<script type="text/javascript" src="/static/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true);
 	});
 </script>
 
-<link rel="stylesheet" type="text/css" href="/cam/static/css/ddsmoothmenu.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/ddsmoothmenu.css" />
 
-<script type="text/javascript" src="/cam/static/js/ddsmoothmenu.js">
+<script type="text/javascript" src="/static/js/ddsmoothmenu.js">
 
 /***********************************************
 * Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
@@ -46,8 +46,8 @@ function clearText(field)
 
 </script>
 
-<link rel="stylesheet" href="/cam/static/css/slimbox2.css" type="text/css" media="screen" /> 
-<script type="text/JavaScript" src="/cam/static/js/slimbox2.js"></script> 
+<link rel="stylesheet" href="/static/css/slimbox2.css" type="text/css" media="screen" /> 
+<script type="text/JavaScript" src="/static/js/slimbox2.js"></script> 
 
 
 </head>
@@ -66,7 +66,7 @@ function clearText(field)
                 
                 <li><a href="" class="selected">Upload</a>
                     <ul>
-                        <li><a href="/cam/company/upload">Upload New Program</a></li>                                                                                             
+                        <li><a href="/company/upload">Upload New Program</a></li>                                                                                             
                   </ul>
                 </li>                        
             </ul>

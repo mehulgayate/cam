@@ -7,10 +7,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Admin Login</title>
-  <link rel="stylesheet" href="/cam/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/style.css">
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
-  <script type="text/javascript" src="/cam/static/js/jquery-2.1.0.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-2.1.0.min.js"></script>
   
 </head>
 
@@ -18,7 +18,7 @@
   <div class="container">
     <section class="register">
       <h1>Admin Login</h1>
-      <form method="post" action="/cam/company/authenticate" id="loginForm">
+      <form method="post" action="/company/authenticate" id="loginForm">
       <div class="reg_section personal_info">
       <h3>Login</h3>
       <input id="email" type="text" name="email" value="" placeholder="Your E-mail Address" required>
@@ -29,7 +29,7 @@
           
         </label>
       </p>
-      <p class="submit"><a href="/cam/company/register" style="float: left;">Register</a><input type="submit" name="commit" value="Login"></p>
+      <p class="submit"><a href="/company/register" style="float: left;">Register</a><input type="submit" name="commit" value="Login"></p>
       </form>
     </section>
   </div>

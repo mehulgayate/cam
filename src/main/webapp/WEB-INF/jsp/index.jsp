@@ -8,7 +8,7 @@
 <title>Login</title>
 
 	<!---------- CSS ------------>	
-    <link href="/cam/static/css/addMedicalProfile.css" rel="stylesheet" >
+    <link href="/static/css/addMedicalProfile.css" rel="stylesheet" >
 </head>
 
 <body>

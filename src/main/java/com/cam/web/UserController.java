@@ -1,5 +1,7 @@
 package com.cam.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -98,6 +100,15 @@ public class UserController {
 		dataStoreManager.save(company);
 		return mv;
 	}
-	
-	
+	@RequestMapping("/list-companies.json")
+	public ModelAndView listComanies(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView("json-string");
+		JSONObject jsonObject=new JSONObject();	
+		List<Company> companies =repository.listCompanies();
+		for (Company company : companies) {
+			jsonObject.put(company.getId().toString(), company.getName());
+		}
+		mv.addObject("response", jsonObject);
+		return mv;
+	}	
 }

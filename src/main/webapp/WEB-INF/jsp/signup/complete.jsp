@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Registration Form</title>
-  <link rel="stylesheet" href="/cam/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/style.css">
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -15,7 +15,7 @@
   <div class="container">
     <section class="register">
       <h1>Registration Complete</h1>
-      <a href="/cam/company/login">Login</a>
+      <a href="/company/login">Login</a>
     </section>
   </div>
 </body>

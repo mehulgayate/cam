@@ -17,7 +17,7 @@ public class MedicalProfileTheshold {
 	private int energyExpenditure=AllProperties.ENERGY_EXPENDITURE;
 	private int saltIntake=AllProperties.SALT_INTAKE;
 	public int heartBeats=AllProperties.HEART_BEATS;
-	public int suder=AllProperties.SUGER;	
+	public int suger=AllProperties.SUGER;	
 	
 	public int getBloodPressure() {
 		return bloodPressure;
@@ -42,8 +42,20 @@ public class MedicalProfileTheshold {
 	}
 	public void setSaltIntake(int saltIntake) {
 		this.saltIntake = saltIntake;
-	}
+	}	
 	
+	public int getHeartBeats() {
+		return heartBeats;
+	}
+	public void setHeartBeats(int heartBeats) {
+		this.heartBeats = heartBeats;
+	}
+	public int getSuger() {
+		return suger;
+	}
+	public void setSuger(int suger) {
+		this.suger = suger;
+	}
 	public JSONObject toJSON(){
 		JSONObject jsonObject=new JSONObject();
 		jsonObject.put("bloodPressure", this.bloodPressure);
