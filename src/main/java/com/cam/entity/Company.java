@@ -12,6 +12,7 @@ public class Company extends EntityBase{
 	private String address;
 	private String country;
 	private String password;
+	private String privateKey;
 	
 	public String getName() {
 		return name;
@@ -43,7 +44,11 @@ public class Company extends EntityBase{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+	public String getPrivateKey() {
+		return privateKey;
+	}
+	public void setPrivateKey(String privateKey) {
+		this.privateKey = privateKey;
+	}
 
 }

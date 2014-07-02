@@ -1,0 +1,1 @@
+http://cam.mehulgayate.cloudbees.net/medical/addMedicalProfile?id=1&booldPressure=155&energyExpenditure=33&missedMedication=2&saltIntake=55&bloodGroup=A&suger=12&heartBeats=66&normalDiet=true&physicalActivity=false&companyId=1

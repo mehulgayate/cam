@@ -29,6 +29,7 @@ import com.cam.entity.ProgramBranchSolutions;
 import com.cam.entity.Solution;
 import com.cam.entity.support.Repository;
 import com.cam.mvc.FileUploadForm;
+import com.cam.utility.EncryptionUtility;
 import com.evalua.entity.support.DataStoreManager;
 
 @Controller
@@ -39,6 +40,9 @@ public class BranchingProgramController {
 
 	@Resource
 	private DataStoreManager dataStoreManager;
+	
+	@Resource
+	private EncryptionUtility encryptionUtility;
 
 
 	@RequestMapping("/company/upload-new")
@@ -89,7 +93,7 @@ public class BranchingProgramController {
 		String jsonString=getStringFromInputStream(fileUploadForm.getFile().getInputStream());
 		
 		
-		JSONObject jsonObject=JSONObject.fromObject(jsonString);
+		JSONObject jsonObject=JSONObject.fromObject(encryptionUtility.decryptString(jsonString,company.getPrivateKey()));
 		
 		JSONArray soluationsArray=jsonObject.getJSONArray("solutions");
 		
@@ -146,6 +150,13 @@ public class BranchingProgramController {
 	@RequestMapping("/company/upload")
 	public ModelAndView showNewUpload(){
 		ModelAndView mv=new ModelAndView("upload");
+
+		return mv;
+	}
+	
+	@RequestMapping("/company/encrypt")
+	public ModelAndView showEncrypt(){
+		ModelAndView mv=new ModelAndView("encrypt");
 
 		return mv;
 	}

@@ -19,7 +19,7 @@ mvn compile war:exploded
 
 if [ ! -L $TOMCAT_WEBAPP/$PROJECT_NAME ]; then
 cd $TOMCAT_WEBAPP
-ln -s $TARGET_WEBAPP $PROJECT_NAME
+ln -s $TARGET_WEBAPP ROOT
 fi
 
 cd $TARGET_WEBAPP 

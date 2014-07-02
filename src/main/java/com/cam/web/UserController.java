@@ -1,18 +1,26 @@
 package com.cam.web;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import thep.paillier.PrivateKey;
 
 import com.cam.entity.Company;
 import com.cam.entity.User;
@@ -31,7 +39,7 @@ public class UserController {
 	private DataStoreManager dataStoreManager;
 	
 	@Resource
-	private Repository repository;
+	private Repository repository;	
 	
 	@RequestMapping("/register")
 	public ModelAndView registerNewUser(HttpServletRequest request,@ModelAttribute(UserForm.key) UserForm userForm){
@@ -91,12 +99,17 @@ public class UserController {
 	}
 	
 	@RequestMapping("/company/register/add")
-	public ModelAndView companyRegisterAdd(@ModelAttribute Company company){
+	public ModelAndView companyRegisterAdd(@ModelAttribute Company company) throws NoSuchAlgorithmException, NoSuchProviderException{
 		ModelAndView mv=new ModelAndView("signup/complete");
 		Company company2=repository.findCompanyByEmail(company.getEmail());
 		if(company2!=null){
 			return mv;
 		}
+		byte[] r = new byte[16]; //Means 2048 bit
+		Random random=new Random();
+		random.nextBytes(r);
+		String s = Base64.encodeBase64String(r);
+		company.setPrivateKey(s);
 		dataStoreManager.save(company);
 		return mv;
 	}
@@ -111,4 +124,6 @@ public class UserController {
 		mv.addObject("response", jsonObject);
 		return mv;
 	}	
+	
+	
 }

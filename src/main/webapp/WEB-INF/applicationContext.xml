@@ -99,6 +99,9 @@
 	<bean id="medicalProfileThreshold"
 		class="com.cam.utility.MedicalProfileTheshold">
 	</bean>	
+	<bean id="encryptionUtility"
+		class="com.cam.utility.EncryptionUtility">
+	</bean>
 	
 		
 </beans>
