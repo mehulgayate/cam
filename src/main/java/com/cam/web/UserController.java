@@ -59,6 +59,7 @@ public class UserController {
 		if(user!=null){
 			jsonObject.put("success", "success");
 			jsonObject.put("id", user.getId());
+			jsonObject.put("privateKey", user.getPrivateKey());
 		}else{
 			jsonObject.put("fail", "fail");
 		}

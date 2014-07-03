@@ -52,6 +52,15 @@ public class MedicalProfileController {
 		if(medicalProfile==null){
 			medicalProfile=new UserMedicalProfile();
 		}
+		
+		System.out.println("Private Key : "+request.getParameter("privateKey"));
+		
+		if(!user.getPrivateKey().equals(request.getParameter("privateKey"))){
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("failure", "failure");
+			mv.addObject("data", jsonObject);
+			return mv;
+		}
 		medicalProfile.setBloodPressure(new Integer(request.getParameter("booldPressure")));
 		medicalProfile.setEnergyExpenditure(new Integer(request.getParameter("energyExpenditure")));
 		medicalProfile.setMissedMedication(new Integer(request.getParameter("missedMedication")));
