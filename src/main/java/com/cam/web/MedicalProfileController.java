@@ -22,6 +22,7 @@ import com.cam.entity.User;
 import com.cam.entity.UserMedicalProfile;
 import com.cam.entity.support.Repository;
 import com.cam.entity.support.TreeLocation;
+import com.cam.utility.EncryptionUtility;
 import com.cam.utility.MedicalProfileTheshold;
 import com.cam.utility.UserUtility;
 import com.evalua.entity.support.DataStoreManager;
@@ -37,6 +38,9 @@ public class MedicalProfileController {
 
 	@Resource
 	private DataStoreManager dataStoreManager;
+	
+	@Resource
+	private EncryptionUtility encryptionUtility;
 
 	String traversePath="";
 
@@ -51,16 +55,8 @@ public class MedicalProfileController {
 		UserMedicalProfile medicalProfile=repository.findMedicalProfileByUser(user);
 		if(medicalProfile==null){
 			medicalProfile=new UserMedicalProfile();
-		}
+		}		
 		
-		System.out.println("Private Key : "+request.getParameter("privateKey"));
-		
-		if(!user.getPrivateKey().equals(request.getParameter("privateKey"))){
-			JSONObject jsonObject=new JSONObject();
-			jsonObject.put("failure", "failure");
-			mv.addObject("data", jsonObject);
-			return mv;
-		}
 		medicalProfile.setBloodPressure(new Integer(request.getParameter("booldPressure")));
 		medicalProfile.setEnergyExpenditure(new Integer(request.getParameter("energyExpenditure")));
 		medicalProfile.setMissedMedication(new Integer(request.getParameter("missedMedication")));
@@ -74,13 +70,17 @@ public class MedicalProfileController {
 
 		Company company=repository.findCompanyById(new Long(request.getParameter("companyId")));
 		String finalString=processMedicalProfile(medicalProfile, threshold,company);
+		String encFinalString=encryptionUtility.encriptString(finalString, user.getPrivateKey());
+		String encTra=encryptionUtility.encriptString(traversePath, user.getPrivateKey());
 
 		dataStoreManager.save(medicalProfile);
 		JSONObject jsonObject=new JSONObject();
 		jsonObject.put("profile", medicalProfile.toJSON());
 		jsonObject.put("threshold", threshold.toJSON());
 		jsonObject.put("result", finalString);
-		jsonObject.put("traversePath", traversePath);
+		jsonObject.put("enc", encFinalString);
+		jsonObject.put("encTra", encTra);
+		jsonObject.put("traversePath", traversePath);		
 
 		mv.addObject("data", jsonObject);
 		return mv;

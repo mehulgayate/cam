@@ -55,8 +55,17 @@ public class UserController {
 	public ModelAndView login(HttpServletRequest request,@RequestParam String email,@RequestParam String password){
 		ModelAndView mv=new ModelAndView("json-string");
 		JSONObject jsonObject=new JSONObject();	
-		User user=userService.authenticate(email,password);
+		User user=userService.authenticate(email,password);		
+		
 		if(user!=null){
+			
+			byte[] r = new byte[16]; //Means 2048 bit
+			Random random=new Random();
+			random.nextBytes(r);
+			String s = Base64.encodeBase64String(r);			
+			user.setPrivateKey(s);
+			dataStoreManager.save(user);
+			
 			jsonObject.put("success", "success");
 			jsonObject.put("id", user.getId());
 			jsonObject.put("privateKey", user.getPrivateKey());
@@ -114,6 +123,7 @@ public class UserController {
 		dataStoreManager.save(company);
 		return mv;
 	}
+	
 	@RequestMapping("/list-companies.json")
 	public ModelAndView listComanies(HttpServletRequest request){
 		ModelAndView mv=new ModelAndView("json-string");
@@ -124,7 +134,21 @@ public class UserController {
 		}
 		mv.addObject("response", jsonObject);
 		return mv;
-	}	
+	}
+	
+	@RequestMapping("/verify-privatekey")
+	public ModelAndView verifyPrivateKey(@RequestParam Long id,
+			@RequestParam String privateKey){
+		ModelAndView mv=new ModelAndView("json-string");
+		User user=repository.findUserById(id);
+		System.out.println(user.getPrivateKey()+" **** "+privateKey);
+		if(user.getPrivateKey().equals(privateKey)){
+			mv.addObject("response", true);
+		}else{
+			mv.addObject("response", false);
+		}
+		return mv;
+	}
 	
 	
 }

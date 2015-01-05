@@ -55,7 +55,7 @@ function clearText(field)
 
 <div id="templatemo_wrapper">
 	<div id="templatemo_header">
-    	<div id="site_title"><a rel="nofollow" href="">CAM</a></div>
+    	<div id="site_title"><a style="background: none;" rel="nofollow" href="">CAM</a></div>
         
     </div> <!-- END of header -->
 

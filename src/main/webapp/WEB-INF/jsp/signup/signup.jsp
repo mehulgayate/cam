@@ -28,6 +28,7 @@
       <div class="reg_section password">
       <h3>Company Address</h3>
       <select name="country">
+      <option value="">India</option>
         <option value="">Egypt</option>
         <option value="">Palastine</option>
         <option value="">Syria</option>
