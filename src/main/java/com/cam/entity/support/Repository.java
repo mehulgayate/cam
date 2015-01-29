@@ -129,5 +129,10 @@ public class Repository {
 				.setParameter("id", id)
 				.uniqueResult();
 	}
+	
+	public List<User> listUsers(){
+		return  getSession().createQuery("From "+User.class.getName()).
+				list();
+	}
 
 }
