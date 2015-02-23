@@ -1,5 +1,6 @@
 package com.cam.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -38,7 +39,7 @@ public class MedicalProfileController {
 
 	@Resource
 	private DataStoreManager dataStoreManager;
-	
+
 	@Resource
 	private EncryptionUtility encryptionUtility;
 
@@ -56,7 +57,7 @@ public class MedicalProfileController {
 		if(medicalProfile==null){
 			medicalProfile=new UserMedicalProfile();
 		}		
-		
+
 		medicalProfile.setBloodPressure(new Integer(request.getParameter("booldPressure")));
 		medicalProfile.setEnergyExpenditure(new Integer(request.getParameter("energyExpenditure")));
 		medicalProfile.setMissedMedication(new Integer(request.getParameter("missedMedication")));
@@ -81,6 +82,38 @@ public class MedicalProfileController {
 		jsonObject.put("enc", encFinalString);
 		jsonObject.put("encTra", encTra);
 		jsonObject.put("traversePath", traversePath);		
+
+
+
+		List<Company> companies = repository.listCompanies();
+		List<String> results = new ArrayList<String>();
+		List<String> resultsEnc = new ArrayList<String>();
+		List<String> resultEncTra = new ArrayList<String>();
+		List<String> companiesNames = new ArrayList<String>();
+		List<Integer> count = new ArrayList<Integer>();
+
+
+		for (Company company2 : companies) {
+			BranchingProgram branchingProgram2 = repository.findBranchingProgramByCompany(company2);
+			if(branchingProgram2!=null && branchingProgram2.getBranches().size()>0){
+				String tra = "";
+				String analysisFinalString=processMedicalProfile(medicalProfile, threshold,company2);
+				String analysiEncFinalString=encryptionUtility.encriptString(analysisFinalString, user.getPrivateKey());
+				String analysiEncTra=encryptionUtility.encriptString(tra, user.getPrivateKey());
+
+				results.add(analysisFinalString);
+				resultsEnc.add(analysiEncFinalString);
+				resultEncTra.add(analysiEncTra);		
+				companiesNames.add(company2.getName());
+				count.add(branchingProgram2.getBranches().size());
+			}
+		}
+
+		jsonObject.put("results", results);
+		jsonObject.put("resultsEnc", resultsEnc);
+		jsonObject.put("resultEncTra", resultEncTra);
+		jsonObject.put("companiesNames", companiesNames);
+		jsonObject.put("count", count);
 
 		mv.addObject("data", jsonObject);
 		return mv;
@@ -135,6 +168,7 @@ public class MedicalProfileController {
 	private String processMedicalProfile(UserMedicalProfile medicalProfile, MedicalProfileTheshold threshold,Company company){
 
 		BranchingProgram branchingProgram=repository.findBranchingProgramByCompany(company);
+
 		if(branchingProgram!=null){
 			List<ProgramBranch> branches=branchingProgram.getBranches();
 			ProgramBranch rootBranch=null;
@@ -152,6 +186,7 @@ public class MedicalProfileController {
 			}
 
 			//Start processing
+			traversePath="";
 			String finalString=traverseThroughTree(rootBranch,medicalProfile,threshold,branchingProgram);
 			return finalString;
 		}		

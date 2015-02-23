@@ -52,13 +52,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletRequest request,@RequestParam String email,@RequestParam String password){
+	public ModelAndView login(HttpServletRequest request,@RequestParam String email,@RequestParam String password,HttpSession session){
 		ModelAndView mv=new ModelAndView("json-string");
 		JSONObject jsonObject=new JSONObject();	
 		User user=userService.authenticate(email,password);		
 		
 		if(user!=null){
-			
+			session.setAttribute("user", user);
 			byte[] r = new byte[16]; //Means 2048 bit
 			Random random=new Random();
 			random.nextBytes(r);
