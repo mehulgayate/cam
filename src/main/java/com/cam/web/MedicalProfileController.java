@@ -89,6 +89,7 @@ public class MedicalProfileController {
 		List<String> results = new ArrayList<String>();
 		List<String> resultsEnc = new ArrayList<String>();
 		List<String> resultEncTra = new ArrayList<String>();
+		List<String> resultTra = new ArrayList<String>();
 		List<String> companiesNames = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();
 
@@ -99,10 +100,11 @@ public class MedicalProfileController {
 				String tra = "";
 				String analysisFinalString=processMedicalProfile(medicalProfile, threshold,company2);
 				String analysiEncFinalString=encryptionUtility.encriptString(analysisFinalString, user.getPrivateKey());
-				String analysiEncTra=encryptionUtility.encriptString(tra, user.getPrivateKey());
+				String analysiEncTra=encryptionUtility.encriptString(traversePath, user.getPrivateKey());
 
 				results.add(analysisFinalString);
 				resultsEnc.add(analysiEncFinalString);
+				resultTra.add(traversePath);
 				resultEncTra.add(analysiEncTra);		
 				companiesNames.add(company2.getName());
 				count.add(branchingProgram2.getBranches().size());
@@ -113,6 +115,7 @@ public class MedicalProfileController {
 		jsonObject.put("resultsEnc", resultsEnc);
 		jsonObject.put("resultEncTra", resultEncTra);
 		jsonObject.put("companiesNames", companiesNames);
+		jsonObject.put("tra", resultTra);
 		jsonObject.put("count", count);
 
 		mv.addObject("data", jsonObject);

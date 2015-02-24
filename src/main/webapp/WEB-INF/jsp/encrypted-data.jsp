@@ -82,15 +82,17 @@ $(function(){
 					$("#treeTraverse").html(resultTraverse);
 					
 					$("#analysis").html("");
-		               var counti=1000;
+		               var counti=0;
 						for(var i=0;i<stored.companiesNames.length;i++){
 							$("#analysis").append('<div><strong>Comany :</strong>'+stored.companiesNames[i]+'<br/>'+
-							'<strong>Result : </strong>'+stored.results[i]+
-							'<div><br/>');
-							if(counti > stored.count[i]){
+							'<strong>Traverse : </strong>'+stored.tra[i]+
+							'<div><br/>'+
+										'<strong>Result : </strong>'+stored.results[i]);
+							if(counti < stored.count[i]){
 								$("#bestResult").html('<div><strong>Comany :</strong>'+stored.companiesNames[i]+'<br/>'+
-										'<strong>Result : </strong>'+stored.results[i]+
-										'<div><br/>');
+										'<strong>Traverse : </strong>'+stored.tra[i]+
+										'<div><br/>'+
+										'<strong>Result : </strong>'+stored.results[i]);
 								counti=stored.count[i];
 							}
 						}
@@ -168,15 +170,17 @@ $("#addExpense").click(function(){
 					resultTraverse=data.traversePath+"";
 					$("#decryptButton").show();
 					$("#analysis").html("");
-	               var counti=10000;
+	               var counti=0;
 					for(var i=0;i<data.companiesNames.length;i++){
 						$("#analysis").append('<div><strong>Comany :</strong>'+data.companiesNames[i]+'<br/>'+
-						'<strong>Result : </strong>'+data.resultEncTra[i]+
-						'<div><br/>');
-						if(counti > data.count[i]){
+						'<strong>Traverse : </strong>'+data.resultEncTra[i]+
+						'<div><br/>'+
+						'<strong>Result : </strong>'+data.resultsEnc[i]);
+						if(counti < data.count[i]){
 							$("#bestResult").html('<div><strong>Comany :</strong>'+data.companiesNames[i]+'<br/>'+
-									'<strong>Result : </strong>'+data.resultEncTra[i]+
-									'<div><br/>');
+									'<strong>Traverse : </strong>'+data.resultEncTra[i]+
+									'<div><br/>'+
+									'<strong>Result : </strong>'+data.resultsEnc[i]);
 							counti=data.count[i];
 						}
 					}
